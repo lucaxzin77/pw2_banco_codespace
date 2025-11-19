@@ -3,29 +3,29 @@
 require_once 'Conta.php';
 
 class Titular{
-    protected string $nome,
-    protected string $cpf,
-    protected string $endereco
+    protected string $nome;
+    protected string $cpf;
+    protected string $endereco;
 
-    public Titular($nome, $cpf, $endereco){
-        $this->nome = $nome,
-        $this->cpf = $cpf,
-        $this->endereco = $endereco
+    public function __construct($nome, $cpf, $endereco){
+        $this->setNome($nome);
+        $this->setCpf($cpf);
+        $this->setEndereco($endereco);
     }
 
-    public setNome($nome){
+    public function setNome($nome){
         if(strlen(trim($nome)) < 3){
-            throw new InvalidArgumentException("O nome do titular deve ter pelo menos 3 caracteres!")
+            throw new InvalidArgumentException("O nome do titular deve ter pelo menos 3 caracteres!");
         }
 
         if(preg_match('/\d/', $nome)){
-            throw new InvalidArgumentException("O nome do titular não pode conter números!")
+            throw new InvalidArgumentException("O nome do titular não pode conter números!");
         }
 
         $this->nome = $nome;
     }
 
-    public setCpf($cpf){
+    public function setCpf($cpf){
         if(strlen(trim($cpf)) != 11){
             throw new InvalidArgumentException("O CPF deve conter exatamente 11 dígitos numéricos!");
         }
@@ -33,7 +33,7 @@ class Titular{
         $this->cpf = $cpf;
     }
 
-    public setEndereco($endereco){
+    public function setEndereco($endereco){
         if(is_null($endereco))
         {
             throw new InvalidArgumentException("O endereço não pode ser vazio!");
@@ -41,18 +41,18 @@ class Titular{
         $this->endereco = $endereco;
     }
 
-    public getNome():string{
+    public function getNome():string{
         return $this->nome;
     }
-    public getCpf():string{
+    public function getCpf():string{
         return $this->cpf;
     }
-    public getEndereco():string{
+    public function getEndereco():string{
         return $this->endereco;
     }
 
     #[Override]
-    public ToString():string{
-        return 'Nome: '.''$this->nome''.', CPF: '.''$this->cpf''.', Endereço: '.''$this->endereco''.'';
+    public function toString(): string {
+        return 'Nome: ' . $this->nome . ', CPF: ' . $this->cpf . ', Endereço: ' . $this->endereco;
     }
 }

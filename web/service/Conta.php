@@ -49,6 +49,6 @@ abstract class Conta{
         $resultado = [];
 
         $resultado['saque'] = $this->Sacar($valor);
-        $resultado['saque'] = $contaDestino->Depositar($valor);
+        $resultado['deposito'] = $contaDestino->Depositar($valor);
     }
 }
